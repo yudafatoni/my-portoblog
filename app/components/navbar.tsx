@@ -34,7 +34,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       className="fixed top-0 w-full z-[100] px-4 md:px-6 py-4 flex justify-center"
     >
-      <div className="w-full max-w-5xl flex items-center justify-between bg-white/80 dark:bg-black/80 backdrop-blur-xl border border-black/5 dark:border-white/10 px-6 py-3 rounded-full shadow-2xl relative">
+      <div className="w-full max-w-5xl flex items-center justify-between bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-black/5 dark:border-white/10 px-6 py-3 rounded-full shadow-2xl">
 
         {/* LOGO */}
         <Link href="/" className="font-bold tracking-tighter text-xl hover:italic transition-all z-[110]">
@@ -52,13 +52,13 @@ export default function Navbar() {
         {/* CONTROLS */}
         <div className="flex items-center gap-2 md:gap-4 z-[110]">
           {/* Toggle Bahasa */}
-          <button
+          {/* <button
             onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
             className="flex items-center gap-1 text-[10px] font-mono hover:bg-black/5 dark:hover:bg-white/5 px-2 py-1 rounded"
           >
             <Languages size={14} />
             <span className="hidden sm:inline">{lang.toUpperCase()}</span>
-          </button>
+          </button> */}
 
           {/* Toggle Dark Mode */}
           <button

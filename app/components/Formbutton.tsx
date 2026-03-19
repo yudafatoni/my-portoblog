@@ -28,7 +28,7 @@ export default function Formbutton() {
 
                 formbutton("create", {
                     action: "https://formspree.io/f/mvzwlgeg", // ID KAMU SUDAH TERPASANG
-                    title: "How can we help?",
+                    title: "Get in Touch",
                     fields: [
                         {
                             type: "email",
