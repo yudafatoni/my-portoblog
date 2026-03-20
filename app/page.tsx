@@ -1,4 +1,5 @@
 "use client"
+
 import Image from "next/image"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useLanguage } from "./src/context/LanguageContext"
@@ -93,8 +94,7 @@ function Hero() {
 
       {/* 1. BACKGROUND FOTO FULL (Optimized with next/image) */}
       <div className="absolute inset-0 z-0 grayscale opacity-60 dark:opacity-40"> {/* Grayscale & Adjust Opacity for vibe */}
-        <Image
-          src="/hero.jpg" // GANTI DENGAN FOTO KAMU
+        <Image src="/hero.jpg" // GANTI DENGAN FOTO KAMU
           alt="Portrait"
           fill
           priority
