@@ -94,7 +94,7 @@ function Hero() {
 
       {/* 1. BACKGROUND FOTO FULL (Optimized with next/image) */}
       <div className="absolute inset-0 z-0 grayscale opacity-60 dark:opacity-40"> {/* Grayscale & Adjust Opacity for vibe */}
-        <Image src="/hero.jpg" // GANTI DENGAN FOTO KAMU
+        <Image src="/gambarhero.jpg" // GANTI DENGAN FOTO KAMU
           alt="Portrait"
           fill
           priority
@@ -213,7 +213,7 @@ function GallerySection() {
 
   const images = [
     { src: "/pict1.jpg", y: y1, size: "w-64 h-80" },
-    { src: "/pict2.jpg", y: y2, size: "w-80 h-96" },
+    { src: "/gambar2.jpg", y: y2, size: "w-80 h-96" },
     { src: "/pict3.jpg", y: y3, size: "w-72 h-72" },
 
   ]
