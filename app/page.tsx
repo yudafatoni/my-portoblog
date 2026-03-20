@@ -213,17 +213,36 @@ function GallerySection() {
           key={index}
           style={{ y: img.y }}
           initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1, delay: index * 0.2, ease: "circOut" }}
-          whileHover={{ scale: 1.05, rotate: index % 2 === 0 ? 3 : -3 }}
-          whileTap={{ scale: 0.95 }} // FEEDBACK UNTUK MOBILE
-          className={`relative overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 rounded-sm border border-black/5 dark:border-white/5 shadow-2xl ${img.size}`}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+            // JANGAN AKTIFKAN WARNA DI SINI, BIARKAN HITAM PUTIH SAAT SCROLL
+          }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 1, delay: index * 0.1, ease: "circOut" }}
+
+          // --- PENGATURAN WARNA ---
+
+          // Untuk Desktop: Berwarna saat mouse di atas gambar
+          whileHover={{
+            scale: 1.05,
+            rotate: index % 2 === 0 ? 3 : -3,
+            filter: "grayscale(0%)" // <--- BERWARNA SAAT HOVER
+          }}
+
+          // Untuk Mobile: Berwarna saat layar DISENTUH/DITEKAN
+          whileTap={{
+            scale: 0.95,
+            filter: "grayscale(0%)" // <--- BERWARNA SAAT DITAP (SENTUH)
+          }}
+
+          // Tambahkan class Tailwind 'grayscale' agar default-nya hitam putih
+          className={`relative overflow-hidden grayscale transition-all duration-700 rounded-sm border border-black/5 dark:border-white/5 shadow-2xl ${img.size}`}
         >
           <img
             src={img.src}
             alt="Gallery"
-            className="object-cover w-full h-full scale-110 hover:scale-100 transition-transform duration-[2s] ease-in-out"
+            className="object-cover w-full h-full scale-110 md:group-hover:scale-100 transition-transform duration-[2s] ease-in-out"
           />
         </motion.div>
       ))}
