@@ -1,16 +1,5 @@
-import {defineType, defineArrayMember} from 'sanity'
-import {ImageIcon} from '@sanity/icons'
-
-/**
- * This is the schema type for block content used in the post document type
- * Importing this type into the studio configuration's `schema` property
- * lets you reuse it in other document types with:
- *  {
- *    name: 'someName',
- *    title: 'Some title',
- *    type: 'blockContent'
- *  }
- */
+import {defineType, defineArrayMember, defineField} from 'sanity'
+import {ImageIcon, CodeIcon, DesktopIcon} from '@sanity/icons'
 
 export const blockContentType = defineType({
   title: 'Block Content',
@@ -19,10 +8,6 @@ export const blockContentType = defineType({
   of: [
     defineArrayMember({
       type: 'block',
-      // Styles let you define what blocks can be marked up as. The default
-      // set corresponds with HTML tags, but you can set any title or value
-      // you want, and decide how you want to deal with it where you want to
-      // use your content.
       styles: [
         {title: 'Normal', value: 'normal'},
         {title: 'H1', value: 'h1'},
@@ -31,16 +16,16 @@ export const blockContentType = defineType({
         {title: 'H4', value: 'h4'},
         {title: 'Quote', value: 'blockquote'},
       ],
-      lists: [{title: 'Bullet', value: 'bullet'}],
-      // Marks let you mark up inline text in the Portable Text Editor
+      lists: [
+        {title: 'Bullet', value: 'bullet'},
+        {title: 'Numbered', value: 'number'}, // UPGRADE: Tambah list angka
+      ],
       marks: {
-        // Decorators usually describe a single property – e.g. a typographic
-        // preference or highlighting
         decorators: [
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
+          {title: 'Code', value: 'code'}, // UPGRADE: Bisa bikin teks inline code `seperti ini`
         ],
-        // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
           {
             title: 'URL',
@@ -57,9 +42,37 @@ export const blockContentType = defineType({
         ],
       },
     }),
-    // You can add additional types here. Note that you can't use
-    // primitive types such as 'string' and 'number' in the same array
-    // as a block type.
+
+    // --- FITUR UTAMA: API V3 ---
+    defineArrayMember({
+      type: 'object',
+      name: 'tableauEmbed',
+      title: 'Tableau Dashboard (v3)',
+      icon: DesktopIcon,
+      fields: [
+        defineField({
+          name: 'url',
+          type: 'url',
+          title: 'Tableau Public URL',
+          description: 'Contoh: https://public.tableau.com/views/NamaProject/Dashboard',
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+          name: 'height',
+          type: 'number',
+          title: 'Height (px)',
+          description: 'Default: 600. Sesuaikan dengan tinggi dashboard kamu.',
+          initialValue: 600,
+        }),
+        defineField({
+          name: 'caption',
+          type: 'string',
+          title: 'Insight Caption',
+          description: 'Keterangan singkat analisis data di bawah dashboard.',
+        }),
+      ],
+    }),
+
     defineArrayMember({
       type: 'image',
       icon: ImageIcon,
@@ -74,3 +87,80 @@ export const blockContentType = defineType({
     }),
   ],
 })
+
+// import {defineType, defineArrayMember} from 'sanity'
+// import {ImageIcon} from '@sanity/icons'
+
+// /**
+//  * This is the schema type for block content used in the post document type
+//  * Importing this type into the studio configuration's `schema` property
+//  * lets you reuse it in other document types with:
+//  *  {
+//  *    name: 'someName',
+//  *    title: 'Some title',
+//  *    type: 'blockContent'
+//  *  }
+//  */
+
+// export const blockContentType = defineType({
+//   title: 'Block Content',
+//   name: 'blockContent',
+//   type: 'array',
+//   of: [
+//     defineArrayMember({
+//       type: 'block',
+//       // Styles let you define what blocks can be marked up as. The default
+//       // set corresponds with HTML tags, but you can set any title or value
+//       // you want, and decide how you want to deal with it where you want to
+//       // use your content.
+//       styles: [
+//         {title: 'Normal', value: 'normal'},
+//         {title: 'H1', value: 'h1'},
+//         {title: 'H2', value: 'h2'},
+//         {title: 'H3', value: 'h3'},
+//         {title: 'H4', value: 'h4'},
+//         {title: 'Quote', value: 'blockquote'},
+//       ],
+//       lists: [{title: 'Bullet', value: 'bullet'}],
+//       // Marks let you mark up inline text in the Portable Text Editor
+//       marks: {
+//         // Decorators usually describe a single property – e.g. a typographic
+//         // preference or highlighting
+//         decorators: [
+//           {title: 'Strong', value: 'strong'},
+//           {title: 'Emphasis', value: 'em'},
+//         ],
+//         // Annotations can be any object structure – e.g. a link or a footnote.
+//         annotations: [
+//           {
+//             title: 'URL',
+//             name: 'link',
+//             type: 'object',
+//             fields: [
+//               {
+//                 title: 'URL',
+//                 name: 'href',
+//                 type: 'url',
+//               },
+//             ],
+//           },
+//         ],
+//       },
+//     }),
+//     // You can add additional types here. Note that you can't use
+//     // primitive types such as 'string' and 'number' in the same array
+//     // as a block type.
+//     defineArrayMember({
+//       type: 'image',
+//       icon: ImageIcon,
+//       options: {hotspot: true},
+//       fields: [
+//         {
+//           name: 'alt',
+//           type: 'string',
+//           title: 'Alternative Text',
+//         }
+//       ]
+//     }),
+//   ],
+// })

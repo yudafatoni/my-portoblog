@@ -43,9 +43,9 @@ export default function Navbar() {
 
         {/* MENU TENGAH (Desktop Only) */}
         <div className="hidden md:flex gap-8 text-[10px] uppercase tracking-[0.3em] font-bold">
-          <Link href="/#gallery" className="hover:opacity-50 transition">Gallery</Link>
           <Link href="/#journey" className="hover:opacity-50 transition">Journey</Link>
           <Link href="/blog" className="hover:opacity-50 transition">Blog</Link>
+          <Link href="/#gallery" className="hover:opacity-50 transition">Gallery</Link>
           <Link href="/#contact" className="hover:opacity-50 transition">Contact</Link>
         </div>
 
